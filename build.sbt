@@ -10,9 +10,9 @@ lazy val commonSettings = Seq(
 
 lazy val common = (project in file("common")).settings(commonSettings: _*)
 
-lazy val batch = (project in file("batch-task")).settings(commonSettings: _*)
+lazy val batch = (project in file("batch-task")).settings(commonSettings: _*).dependsOn(common)
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala).aggregate(common, batch).settings(commonSettings: _*)
+lazy val root = (project in file(".")).enablePlugins(PlayScala).aggregate(common, batch).settings(commonSettings: _*).dependsOn(common)
 
 libraryDependencies ++= Seq(
   jdbc,
@@ -28,4 +28,4 @@ resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 routesGenerator := InjectedRoutesGenerator
 
 /* 執行 dist 前，強制做 clean */
-dist <<= dist.dependsOn(clean)
+dist <<= dist.dependsOn(clean).dependsOn(clean in common)
