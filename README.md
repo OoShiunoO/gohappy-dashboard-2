@@ -50,7 +50,7 @@ Logger 設定檔
 * `conf/prod-logger.xml`: 正式環境設定檔
 
 ### 打包與執行
-打包指令： `dist`
+打包指令： `dist`。在打包程式前，請都先執行 `clean`。
 
 執行
 * 測試版本：`/path/to/bin/<project-name>`
