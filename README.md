@@ -54,8 +54,8 @@ Logger 設定檔
 
 執行
 * 測試版本：`/path/to/bin/<project-name>`
-* 準正式環境版本：`/path/to/bin/<project-name> -Dconfig.resource=pre-prod.conf -Dlogger.resource=conf/pre-prod-logger.xml`
-* 正式環境版本：`/path/to/bin/<project-name> -Dconfig.resource=prod.conf -Dlogger.resource=conf/prod-logger.xml`
+* 準正式環境版本：`/path/to/bin/<project-name> -Dconfig.resource=pre-prod.conf -Dlogger.resource=pre-prod-logger.xml`
+* 正式環境版本：`/path/to/bin/<project-name> -Dconfig.resource=prod.conf -Dlogger.resource=prod-logger.xml`
 
 
 ## batch-task
