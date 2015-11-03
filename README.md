@@ -72,4 +72,11 @@ Logger 設定檔
 * 準正式環境版本：`pre-prod:assembly`
 * 正式環境版本：`prod:assembly`
 
+直接使用 `activator` 打包。方式是：`activator project/config:command`
+
+* 測試版本：`./activator batch/assembly`
+* 準正式環境版本：`./activator batch/pre-prod:assembly`
+* 正式環境版本：`./activator batch/prod:assembly`
+
+
 **本文件請依專案開發過程，隨時更新。**
