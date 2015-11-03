@@ -1,18 +1,7 @@
 import Dependency._
+import DashboardBuild._
 
 name := """dashboard"""
-
-lazy val commonSettings = Seq(
-  organization := "com.feec",
-  version := "1.0",
-  scalaVersion := "2.11.7"
-)
-
-lazy val common = (project in file("common")).settings(commonSettings: _*)
-
-lazy val batch = (project in file("batch-task")).settings(commonSettings: _*).dependsOn(common)
-
-lazy val root = (project in file(".")).enablePlugins(PlayScala).aggregate(common, batch).settings(commonSettings: _*).dependsOn(common)
 
 libraryDependencies ++= Seq(
   jdbc,
@@ -27,5 +16,8 @@ resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 // other, legacy style, accesses its actions statically.
 routesGenerator := InjectedRoutesGenerator
 
-/* 執行 dist 前，強制做 clean */
+/**
+ * 執行 dist 前，強制做 clean；也強制 clean common 專案。
+ * 以下的 dependsOn 的執行順序是 (clean in common) -> clean
+ */
 dist <<= dist.dependsOn(clean).dependsOn(clean in common)

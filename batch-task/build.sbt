@@ -1,4 +1,5 @@
 import Dependency._
+import DashboardBuild._ /* import 父專案上的 DashboardBuild, 來讀取 common 設定 */
 
 name := """batch-task"""
 
@@ -23,9 +24,13 @@ inConfig(preprod)(Defaults.configSettings ++ baseAssemblySettings ++ Defaults.re
   test in assembly := {}
 ))
 
-/* 做 assembly 前，都強制先做 clean */
-assembly <<= assembly.dependsOn(clean)
+/**
+ *
+ * 執行 assembly 前，強制做 clean；也強制 clean common 專案。
+ * 以下的 dependsOn 的執行順序是 (clean in common) -> clean
+ */
+assembly <<= assembly.dependsOn(clean).dependsOn(clean in common)
 
-assembly in prod <<= (assembly in prod).dependsOn(clean)
+assembly in prod <<= (assembly in prod).dependsOn(clean).dependsOn(clean in common)
 
-assembly in preprod <<= (assembly in preprod).dependsOn(clean)
+assembly in preprod <<= (assembly in preprod).dependsOn(clean).dependsOn(clean in common)
